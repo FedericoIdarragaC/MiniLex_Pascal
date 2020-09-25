@@ -8,41 +8,41 @@ import sys
 tokens = (
     # Reserverd words
     #'AUTO',
-    'AND'	
-    'ARRAY'	
-    'BEGIN'	
-    'CASE'	
-    'CONST'
-    'DIV'	
-    'DO'	
-    'DOWNTO'	
-    'ELSE'	
-    'END'
-    'FILE'	
-    'FOR'	
-    'FUNCTION'	
-    'GOTO'	
-    'IF'
-    'IN'	
-    'LABEL'	
-    'MOD'	
-    'NIL'	
-    'NOT'
-    'OF'	
-    'OR'	
-    'PACKED'	
-    'PROCEDURE'	
-    'PROGRAM'
-    'RECORD'	
-    'REPEAT'	
-    'SET'	
-    'THEN'	
-    'TO'
-    'TYPE'	
-    'UNTIL'	
-    'VAR'	
-    'WHILE'	
-    'WITH'
+    'AND',	
+    'ARRAY',
+    'BEGIN',	
+    'CASE',
+    'CONST',
+    'DIV',
+    'DO',
+    'DOWNTO',	
+    'ELSE',
+    'END',
+    'FILE',
+    'FOR',
+    'FUNCTION',	
+    'GOTO',
+    'IF',
+    'IN',
+    'LABEL',
+    'MOD',
+    'NIL',
+    'NOT',
+    'OF',
+    'OR',
+    'PACKED',	
+    'PROCEDURE',	
+    'PROGRAM',
+    'RECORD',
+    'REPEAT',	
+    'SET',
+    'THEN',
+    'TO',
+    'TYPE',
+    'UNTIL',
+    'VAR',
+    'WHILE',
+    'WITH',
    
     # Symbols
     'PLUS',
@@ -76,7 +76,7 @@ tokens = (
     'HASHTAG',
     'DOT',
     'TILDE',
-    'ASSIGN'
+    'ASSIGN',
 
     # Others   
     'ID', 
@@ -162,7 +162,7 @@ def t_IN(t):
     r'in'
     return t	
 def t_LABEL(t):    
-    r'label'r	
+    r'label'
     return t
 def t_MOD(t):    
     r'mod'
@@ -242,13 +242,14 @@ def t_ISEQUAL(t):
 	return t
 
 #Var Names and Numbers
-def t_ID(t):
-    r'\w+(_\d\w)*'
-    return t
+
 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
     t.value = float(t.value)
+    return t
+def t_ID(t):
+    r'\w+(_\d\w)*'
     return t
 
 def t_newline(t):
@@ -256,14 +257,6 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 t_ignore = ' \t'
-
-def t_comments(t):
-    r'/(*(.|\n)*?\*)'
-    t.lexer.lineno += t.value.count('\n')
-
-def t_comments_C99(t):
-    r'//(.)*?\n'
-    t.lexer.lineno += 1
 
 def t_error(t):
     print ("Lexical error: " + str(t.value[0]))
@@ -285,7 +278,7 @@ if __name__ == '__main__':
 	if (len(sys.argv) > 1):
 		fin = sys.argv[1]
 	else:
-		fin = 'evaluacion.pas'
+		fin = 'evaluacion.txt'
 	f = open(fin, 'r')
 	data = f.read()
 	print (data)
