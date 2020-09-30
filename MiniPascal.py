@@ -77,7 +77,7 @@ tokens = (
     'DOT',
     'TILDE',
     'ASSIGN',
-
+    'QUOTE',
     # Others   
     'ID', 
     'NUMBER',
@@ -107,6 +107,7 @@ t_AMPERSANT = r'\&'
 t_HASHTAG = r'\#'
 t_DOT = r'\.'
 t_TILDE = r'`'
+t_QUOTE = r'\"'
 
 
 
@@ -257,6 +258,13 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 t_ignore = ' \t'
+def t_comments(t):
+    r'\(\*(.|\n)*?\*\)'
+    t.lexer.lineno += t.value.count('\n')
+
+def t_comments2(t):
+    r'\{(.|\n)*?\}'
+    t.lexer.lineno += 1
 
 def t_error(t):
     print ("Lexical error: " + str(t.value[0]))

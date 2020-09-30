@@ -6,13 +6,16 @@ program sort(input,output)
     (* multiline comment
      multiline comment *)
 
-    { bad comment
+    { bad comment}
     n := 3
     {multiline comment
     hello
     }
-
-    (* bad comment)
+    
+    (**)
     c := "holi"
-    (* bad comment)
+    (* bad comment *)
     c := "chau"
+    {example}  
+    (*1221 
+    weffew*)
