@@ -242,7 +242,7 @@ def t_ISEQUAL(t):
 	r'=='
 	return t
 
-#Var Names and Numbers
+#Var Names, Numbers and Comments
 
 
 def t_NUMBER(t):
@@ -264,7 +264,8 @@ def t_comments(t):
 
 def t_comments2(t):
     r'\{(.|\n)*?\}'
-    t.lexer.lineno += 1
+    t.lexer.lineno += t.value.count('\n')
+
 
 def t_error(t):
     print ("Lexical error: " + str(t.value[0]))
@@ -286,7 +287,7 @@ if __name__ == '__main__':
 	if (len(sys.argv) > 1):
 		fin = sys.argv[1]
 	else:
-		fin = 'evaluacion.pas'
+		fin = 'evaluacion.txt'
 	f = open(fin, 'r')
 	data = f.read()
 	print (data)
