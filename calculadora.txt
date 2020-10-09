@@ -51,9 +51,10 @@ uses crt;
                   write('entre: ');
                   read(n2);
                   multi:=(n1/n2) ;
-                  writeln('El resultado de la divicion es: ',multi:9:2);
+                  writeln('El resultado de la division es: ',multi:9:2);
                  end ;
-
+                 
+                 {Example of comment}
             5: begin ;
                    write('numero a buscar el porcentaje:  ');
                   read(n1);
@@ -75,3 +76,5 @@ uses crt;
    clrscr;
 
 end.
+{This is a comment}
+(*This is a comment*)

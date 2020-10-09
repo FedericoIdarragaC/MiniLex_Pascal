@@ -46,13 +46,14 @@ uses crt;
                  end;
 
             4: begin ;
-                   write('Dividir:  ');
+                  write('Dividir:  ');
                   read(n1);
                   write('entre: ');
                   read(n2);
                   multi:=(n1/n2) ;
                   writeln('El resultado de la divicion es: ',multi:9:2);
                  end ;
+                 
 
             5: begin ;
                    write('numero a buscar el porcentaje:  ');

@@ -78,6 +78,8 @@ tokens = (
     'TILDE',
     'ASSIGN',
     'QUOTE',
+    'SIMPLEQUOTE',
+    'PERCENTAGE',
     # Others   
     'ID', 
     'NUMBER',
@@ -108,6 +110,8 @@ t_HASHTAG = r'\#'
 t_DOT = r'\.'
 t_TILDE = r'`'
 t_QUOTE = r'\"'
+t_SIMPLEQUOTE = r'\''
+t_PERCENTAGE = r'%'
 
 
 
@@ -130,7 +134,7 @@ def t_CONST(t):
     r'const'
     return t
 def t_DIV(t):    
-    r'div'
+    r'div\s'
     return t	
 def t_DO(t):    
     r'do'
@@ -250,7 +254,8 @@ def t_NUMBER(t):
     t.value = float(t.value)
     return t
 def t_ID(t):
-    r'\w+(_\d\w)*'
+    r'\w+(_\d\w\ )*?'
+    
     return t
 
 def t_newline(t):
@@ -258,6 +263,9 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 t_ignore = ' \t'
+
+
+
 def t_comments(t):
     r'\(\*(.|\n)*?\*\)'
     t.lexer.lineno += t.value.count('\n')
@@ -287,7 +295,7 @@ if __name__ == '__main__':
 	if (len(sys.argv) > 1):
 		fin = sys.argv[1]
 	else:
-		fin = 'evaluacion.txt'
+		fin = 'calculadora.txt'
 	f = open(fin, 'r')
 	data = f.read()
 	print (data)
