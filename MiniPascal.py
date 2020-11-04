@@ -1,8 +1,10 @@
 import ply.lex as lex
 import sys
-
- 
-
+ #                  MINIPASCAL
+  
+#   Sebastián Mora Carmona  - 1085721693
+#   Juan Sebastian Ramirez Arias - 1112794590
+#   Federico Idarraga Cardenas - 1004752521
 
 # list of tokens
 tokens = (
@@ -263,8 +265,6 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 t_ignore = ' \t'
-
-
 
 def t_comments(t):
     r'\(\*(.|\n)*?\*\)'
