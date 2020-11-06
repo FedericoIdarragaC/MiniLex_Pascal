@@ -1,7 +1,7 @@
 program sort(input,output)
   const
     (* another comment *)
-    b := 3
+    b := -3
     c := "hola mundo"
     (* multiline comment
      multiline comment *)

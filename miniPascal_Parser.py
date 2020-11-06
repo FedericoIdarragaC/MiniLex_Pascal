@@ -6,24 +6,223 @@ import sys
 VERBOSE = 1
 
 def p_program(p):
-    'program: PROGRAM ID SEMICOLON declaration_list'
+    'program : PROGRAM ID SEMICOLON block'
     pass
-
-def p_declaration_list_1(p):
-	'declaration_list : declaration_list  declaration' 
-	pass
-
-def p_declaration_list_2(p):
-	'declaration_list : declaration'
-	pass
 
 def p_declaration(p):
 	'''declaration : var_declaration
-				  | fun_declaration
-				  | header_declaration'''
+            | procedure_declaration
+            | function_declaration'''
+	pass
+#--------------
+#Variable's
+def p_var_declaration(p):
+	'''var_declaration : VAR ID var_declaration2 COLON type'''
+	pass
+def p_var_declaration2(p):
+	'''var_declaration2 : empty	| COMMA ID var_declaration2 '''
+	pass
+#--------------
+#Procedure's
+def p_procedure_declaration(p):
+	'''procedure_declaration : procedure_declaration2 SEMICOLON
+			| p_empty'''
+	pass
+			
+def p_procedure_declaration2(p):
+	'''procedure_declaration2 : PROCEDURE ID SEMICOLON block'''
+	pass
+#--------------
+#Function
+def p_function_declaration(p):
+	'function_declaration : FUNCTION ID LPAREN parameters RPAREN COLON type SEMICOLON block'
+	pass
+#--------------
+#Parametros
+def p_parameters(p):
+	''' parameters : VAR ID COLON type parameters2 
+			| ID COLON type parameters2 
+			| empty '''  
+	pass
+
+def p_parameters2(p):
+	''' parameters2 : COMMA VAR ID COLON type parameters2 
+			| COMMA ID COLON type parameters2 
+			| empty '''
+	pass
+#---------------
+#Tipos
+def p_type(p):
+	'''type :  simple_type 
+			| array_type'''
+	pass
+
+def p_array_type(p):
+	'array_type : ARRAY LBRACKET NUMBER RBRACKET OF simple_type'
+	pass
+
+def p_simple_type(p):
+	''' simple_type : type ID '''
+	pass
+#---------------
+#Block's
+def p_block(p):
+	'''block : BEGIN statement block2 END | BEGIN statement block2 SEMICOLON END '''
+	pass
+
+def p_block2(p):
+	'''block2 : empty | SEMICOLON statment block2'''
+	pass
+#---------------
+#Vacio
+def p_empty(p):
+	'empty : '
+	pass
+#--------------
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Statements's
+def p_statement(p):
+	'''statement : simple_statement
+			| structured_statement
+			| declaration'''
 	pass
 
 
+def p_simple_statement(p):
+	'''simple_statement : assignment_statement
+			| call
+			| return_statement
+			| read_statement
+			| write_statement
+			| assert_statement'''
+	pass
+#--------------
+#Call
+def p_call(p):
+	'call : ID LPAREN arguments RPAREN'
+	pass
+
+#--------------
+#Argument
+def p_arguments(p):
+	'''arguments : expr arguments2
+			| empty'''
+	pass
+def p_arguments2(p):
+	'''arguments2 : empty
+			| COMMA expr arguments2'''
+	pass
+#--------------
+#Return 
+def p_return_statement(p):
+	'''return_statement : RETURN
+			| RETURN expr'''
+	pass
+#--------------
+#Read
+def p_read_statement(p):
+	'''read_statement : READ LPAREN read_statement2 RPAREN'''
+	pass
+def p_read_statement2(p):
+	'''read_statement2 : variable
+			| COMMA variable read_statement2 '''
+	pass
+#--------------
+#Write
+def p_write_statement(p):
+	'''write_statement : WRITELN LPAREN arguments RPAREN'''
+	pass
+def p_assert_statement(p):
+	'''assert_statement : ASSERT LPAREN boolean_expr RPAREN'''
+	pass
+def p_boolean_expr(p):
+	'''boolean_expr : TRUE 
+			| FALSE
+			| ID signe ID'''
+	pass
+def p_signe(p):
+	'''signe : < 
+			| >
+			| ==
+			| !=
+			| <=
+			| >='''
+	pass
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Expresiones estructuradas
+def p_structured_statement(p):
+	'''structured_statement : block | if_statement | while_statement'''
+	pass
+
+def p_if_statement(p):
+	'''if_statement : IF boolean_expr THEN statement |
+					  IF boolean_expr THEN statement ELSE statement'''
+	pass
+
+def p_while_statement(p):
+	'''while_statement : WHILE boolean_expr DO statement'''
+	pass
+#--------------
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+def p_expr(p):
+	''' expr : simple_expr | simple_expr relational_op simple_expr '''
+	pass
+
+def p_simple_expr(p):
+	'''simple_expr : sign term simple_expr2 | term simple_expr2'''
+	pass
+
+def p_simple_expr2(p):
+	''' simple_expr2 : empty | adding_op term simple_expr2 '''
+	pass
+
+
+#factor's
+def p_factor(p):
+	'p_factor : call variable literal | LPAREN expr RPAREN'
+	pass
+#--------------
+
+#variables's
+def p_variable(p):
+	'''variable : ID | LBRACKET ID NUMBER RBRACKET '''
+	pass
+#--------------
+
+#relational_operator's
+def p_relational_operator(p):
+	'p_relational_operator : = | <> | < | <= | >= | > '
+	pass
+#--------------
+
+#sign's
+def p_sign(p):
+	'p_sign : + | - '
+	pass
+#--------------
+
+#adding_operator's
+def p_adding_operator(p):
+	'p_adding_operator : + | - | OR'
+	pass
+#--------------
+
+#multiplying_operator's
+def p_multiplying_operator(p):
+	'p_multiplying_operator : * | / | % | AND'
+	pass
+#--------------
+
+#Literal
+def p_literal(p):
+	'''literal : NUMBER | SLASH QUOTE ID SLASH QUOTE'''
+	pass
+#--------------
 
 def p_error(p):
 	if VERBOSE:

@@ -45,6 +45,9 @@ tokens = (
     'VAR',
     'WHILE',
     'WITH',
+    'READ',
+    'ASSERT',
+    'WRITELN',
    
     # Symbols
     'PLUS',
@@ -82,9 +85,11 @@ tokens = (
     'QUOTE',
     'SIMPLEQUOTE',
     'PERCENTAGE',
+    'SLASH',
     # Others   
     'ID', 
     'NUMBER',
+
 )
 
 # Regular expressions rules for a simple tokens 
@@ -92,6 +97,7 @@ t_PLUS   = r'\+'
 t_MINUS  = r'-'
 t_TIMES  = r'\*'
 t_DIVIDE = r'/'
+t_SLASH = r'\\'
 t_EQUAL  = r'='
 t_DISTINT = r'!'
 t_LESS   = r'<'
@@ -227,6 +233,17 @@ def t_WITH(t):
     r'with'
     return t
 
+def t_READ(t):    
+    r'read'
+    return t
+def t_WRITELN(t):    
+    r'writeln'
+    return t
+def t_ASSERT(t):    
+    r'assert'
+    return t
+
+
 ##-----------------------------------------------------------------------------------------------
 def t_ASSIGN(t):
     r':='
@@ -251,14 +268,16 @@ def t_ISEQUAL(t):
 #Var Names, Numbers and Comments
 
 
+
 def t_NUMBER(t):
-    r'\d+(\.\d+)?'
+    r'(-)?\d+(\.\d+)?'
     t.value = float(t.value)
     return t
 def t_ID(t):
     r'\w+(_\d\w\ )*?'
-    
     return t
+
+
 
 def t_newline(t):
     r'\n+'
@@ -295,7 +314,7 @@ if __name__ == '__main__':
 	if (len(sys.argv) > 1):
 		fin = sys.argv[1]
 	else:
-		fin = 'calculadora.txt'
+		fin = 'evaluacion.pas'
 	f = open(fin, 'r')
 	data = f.read()
 	print (data)
