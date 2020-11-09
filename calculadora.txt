@@ -1,9 +1,7 @@
 program proyecto ;
-uses crt;
+  begin
   var opcion,x,c :integer;
   var n1,n2,suma,resta,multi,divi,porcent:double;
-  begin
-  clrscr;
   write('digite la cantidad de calculos a realizar: ');
   read(c);
       for x:=1 to c do
@@ -76,5 +74,3 @@ uses crt;
    clrscr;
 
 end.
-{This is a comment}
-(*This is a comment*)

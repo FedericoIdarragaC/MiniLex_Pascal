@@ -48,8 +48,10 @@ tokens = (
     'READ',
     'ASSERT',
     'WRITELN',
-   
-    # Symbols
+    'RETURN',
+    'TRUE',
+    'FALSE',
+     # Symbols
     'PLUS',
     'PLUSPLUS',
     #'PLUSEQUAL',
@@ -89,6 +91,8 @@ tokens = (
     # Others   
     'ID', 
     'NUMBER',
+    'INTEGER',
+    'SIZE',
 
 )
 
@@ -115,12 +119,11 @@ t_RBLOCK   = r'}'
 t_COLON   = r':'
 t_AMPERSANT = r'\&'
 t_HASHTAG = r'\#'
-t_DOT = r'\.'
 t_TILDE = r'`'
 t_QUOTE = r'\"'
 t_SIMPLEQUOTE = r'\''
 t_PERCENTAGE = r'%'
-
+t_DOT = r'\.'
 
 
 
@@ -170,6 +173,9 @@ def t_GOTO(t):
     return t	
 def t_IF(t):    
     r'if'
+    return t
+def t_INTEGER(t):
+    r'integer'
     return t
 def t_IN(t):    
     r'in'
@@ -242,6 +248,19 @@ def t_WRITELN(t):
 def t_ASSERT(t):    
     r'assert'
     return t
+def t_RETURN(t):
+    r'return'
+    return t
+def t_TRUE(t):    
+    r'true'
+    return t
+def t_FALSE(t):
+    r'false'
+    return t
+def t_SIZE(t):
+    r'size'
+    return t
+
 
 
 ##-----------------------------------------------------------------------------------------------
@@ -314,7 +333,7 @@ if __name__ == '__main__':
 	if (len(sys.argv) > 1):
 		fin = sys.argv[1]
 	else:
-		fin = 'evaluacion.pas'
+		fin = 'calculadora.pas'
 	f = open(fin, 'r')
 	data = f.read()
 	print (data)

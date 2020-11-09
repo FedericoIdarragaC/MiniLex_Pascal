@@ -38,7 +38,7 @@ def p_var_declaration_1(p):
 def p_var_declaration_2(p):
 	'var_declaration : type_specifier ID LBRACKET NUMBER RBRACKET SEMICOLON'
 	pass
-
+ 
 def p_var_declaration_3(p):                     
 	'''var_declaration2 : ID COMMA var_declaration2  
 	                               | ID

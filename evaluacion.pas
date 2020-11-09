@@ -1,4 +1,4 @@
-program sort(input,output)
+program sort
   const
     (* another comment *)
     b := -3
